@@ -53,6 +53,11 @@ app.post("/api/magazines/post", async (req, res) => {
   }
 });
 
+app.get("/api/publisher", async (_request, response) => {
+  const { rows } = await client.query("SELECT * FROM publisher");
+  response.send(rows);
+});
+
 app.listen(port, () => {
   console.log(`Backend är nu igång på ${port}`);
 });

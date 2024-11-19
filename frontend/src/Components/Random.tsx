@@ -1,10 +1,12 @@
 import { mdiRotate3dVariant } from "@mdi/js";
 import { Icon } from "@mdi/react";
+import { allComics } from "../App";
+
 
 interface RandomProps {
-  allComics: Array;
+  allComics: allComics[];
   setCurrentIndex: (index: number) => void;
-  currentIndex: Number;
+  currentIndex: number;
 }
 
 export default function RandomMagazine(props: RandomProps) {
@@ -22,9 +24,3 @@ export default function RandomMagazine(props: RandomProps) {
     </div>
   );
 }
-
-/* RandomMagazine.propTypes = {
-  allComics: PropTypes.array.isRequired,
-  currentIndex: PropTypes.number.isRequired,
-  setCurrentIndex: PropTypes.func.isRequired,
-}; */

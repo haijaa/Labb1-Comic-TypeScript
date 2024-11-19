@@ -7,10 +7,10 @@ import {
   mdiArrowRightThinCircleOutline,
 } from "@mdi/js";
 import { useState, useEffect } from "react";
-/* import Modal from "./modal"; */
+import Modal from "./Components/Modal";
 import Random from "./Components/Random";
 
-interface allComics {
+export interface allComics {
   title: string;
   description: string;
   image: string;
@@ -49,7 +49,7 @@ export default function App() {
               currentIndex={currentIndex}
               setCurrentIndex={setCurrentIndex}
             />
-            {/* <Modal /> */}
+            <Modal />
           </div>
         </div>
         <div className="flex flex-col justify-center items-center">

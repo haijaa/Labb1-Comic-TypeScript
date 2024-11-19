@@ -70,6 +70,10 @@ app.post("/api/magazines/post", (req, res) => __awaiter(void 0, void 0, void 0, 
         res.status(500).send("Fel vid server");
     }
 }));
+app.get("/api/publisher", (_request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rows } = yield client.query("SELECT * FROM publisher");
+    response.send(rows);
+}));
 app.listen(port, () => {
     console.log(`Backend är nu igång på ${port}`);
 });
