@@ -9,6 +9,7 @@ import {
 import { useState, useEffect } from "react";
 import Modal from "./Components/Modal";
 import Random from "./Components/Random";
+import SwapPublisher from "./Components/SwapPublisher";
 
 export interface allComics {
   title: string;
@@ -49,6 +50,7 @@ export default function App() {
               currentIndex={currentIndex}
               setCurrentIndex={setCurrentIndex}
             />
+            <SwapPublisher />
             <Modal />
           </div>
         </div>
