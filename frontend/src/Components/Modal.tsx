@@ -74,7 +74,7 @@ export default function Modal() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title..."
-                    className="rounded-sm h-10 text-black"
+                    className="rounded-sm h-10 textBlack"
                   />
                 </div>
                 <div>
