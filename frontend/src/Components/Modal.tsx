@@ -3,8 +3,8 @@ import { Icon } from "@mdi/react";
 import { mdiPlus } from "@mdi/js";
 
 interface publisher {
-    id:number,
-    name:string
+  id: number;
+  name: string;
 }
 
 export default function Modal() {
@@ -21,7 +21,7 @@ export default function Modal() {
     fetch("http://localhost:3000/api/publisher")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setPublisher(data);
       });
   }, []);

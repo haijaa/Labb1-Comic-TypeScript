@@ -1,9 +1,12 @@
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { Client } from "pg";
-import express from "express";
-import { getMagazines, postMagazine, publisher } from "./interface/queryInterfaces";
-
+import express, { Request, Response } from "express";
+import {
+  getMagazines,
+  postMagazine,
+  publisher,
+} from "./interface/queryInterfaces";
 
 dotenv.config();
 
@@ -19,29 +22,33 @@ const app = express();
 
 app.use(cors(), express.json());
 
-app.get("/api/magazines", async (_request, response) => {
+app.get("/api/magazines", async (_request: Request, response: Response) => {
   const { rows } = await client.query<getMagazines>(
     "SELECT magazines.title, magazines.description, magazines.image, magazines.character, publisher.name AS publisher_name FROM magazines JOIN publisher ON publisher.id = publisherid"
   );
   response.send(rows);
 });
 
-app.get("/api/magazines/marvel", async (_request, response) => {
-  const { rows } = await client.query<getMagazines>(
-    "SELECT magazines.title, magazines.description, magazines.image, magazines.character, publisher.name AS publisher_name FROM magazines JOIN publisher ON publisher.id = publisherid WHERE publisher.id = 1"
-  );
-  response.send(rows);
-});
+app.get(
+  "/api/magazines/marvel",
+  async (_request: Request, response: Response) => {
+    const { rows } = await client.query<getMagazines>(
+      "SELECT magazines.title, magazines.description, magazines.image, magazines.character, publisher.name AS publisher_name FROM magazines JOIN publisher ON publisher.id = publisherid WHERE publisher.id = 1"
+    );
+    response.send(rows);
+  }
+);
 
-app.get("/api/magazines/dc", async (_request, response) => {
+app.get("/api/magazines/dc", async (_request: Request, response: Response) => {
   const { rows } = await client.query<getMagazines>(
     "SELECT magazines.title, magazines.description, magazines.image, magazines.character, publisher.name AS publisher_name FROM magazines JOIN publisher ON publisher.id = publisherid WHERE publisher.id = 2"
   );
   response.send(rows);
 });
 
-app.post("/api/magazines/post", async (req, res) => {
-  const { title, description, image, character, publisherid } = req.body as postMagazine;
+app.post("/api/magazines/post", async (req: Request, res: Response) => {
+  const { title, description, image, character, publisherid } =
+    req.body as postMagazine;
 
   try {
     const { rows } = await client.query<postMagazine>(
@@ -55,10 +62,13 @@ app.post("/api/magazines/post", async (req, res) => {
   }
 });
 
-app.get("/api/publisher", async (_request, response) => {
-  const { rows } = await client.query<publisher>("SELECT * FROM publisher");
-  response.send(rows);
-});
+app.get(
+  "/api/publisher",
+  async (_request: Request, response: Response<publisher[]>) => {
+    const { rows } = await client.query<publisher>("SELECT * FROM publisher");
+    response.send(rows);
+  }
+);
 
 app.listen(port, () => {
   console.log(`Backend är nu igång på ${port}`);
